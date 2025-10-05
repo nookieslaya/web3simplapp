@@ -1,5 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useBalance, useChainId, useWriteContract } from "wagmi";
+import { useAccount, useChainId, useWriteContract } from "wagmi";
 import { counterAbi } from "./abi/counter";
 import Transactions from "./components/Transactions";
 
@@ -9,7 +9,7 @@ import WalletCard from "./components/WalletCard.tsx";
 export default function App() {
     const { address, isConnected } = useAccount();
     const chainId = useChainId();
-    const { data: bal } = useBalance({ address, query: { enabled: !!address } });
+    // const { data: bal } = useBalance({ address, query: { enabled: !!address } });
     const { writeContract, isPending } = useWriteContract();
     const isSepolia = chainId === 11155111;
 
@@ -44,7 +44,7 @@ export default function App() {
                         <button
                             onClick={makeTestTx}
                             disabled={!isSepolia || !isConnected || isPending}
-                            className="mt-2 px-4 py-2 rounded-lg bg-gradient-to-tr shadow-2xl from-yellow-600 to-green-500 cursor-pointer text-white disabled:opacity-50"
+                            className="mt-2 px-4 py-2 rounded-lg bg-gradient-to-tr shadow-2xl from-yellow-600/20 to-green-500/50 cursor-pointer text-white disabled:opacity-50"
                         >
                             {isPending ? "Sending…" : "Make test tx"}
                         </button>
